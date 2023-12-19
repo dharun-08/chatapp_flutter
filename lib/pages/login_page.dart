@@ -1,5 +1,5 @@
 import 'package:chat_app/components/my_text_fields.dart';
-import 'package:chat_app/pages/my_button.dart';
+import 'package:chat_app/components/my_button.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
