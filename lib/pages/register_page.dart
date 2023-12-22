@@ -1,24 +1,25 @@
-import 'package:chat_app/components/my_text_fields.dart';
-import 'package:chat_app/components/my_button.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  final Function()? onTap;
+import '../components/my_button.dart';
+import '../components/my_text_fields.dart';
 
-  const LoginPage({super.key,required this.onTap});
+class RegisterPage extends StatefulWidget {
+  final void Function()? onTap;
+
+  const RegisterPage({super.key,required this.onTap});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
 
-  void signIn() {
+  final confirmpasswordController = TextEditingController();
 
-  }
+  void signUp() {}
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   //welcome text
                   const Text(
-                    "Welcome Dude! You've been missed😊",
+                    "Let's Create an Account 🥳",
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
@@ -71,18 +72,23 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  //sign in button
-                  MyButton(
-                      onTap: signIn,
-                      text: "Sign In"),
+                  MyTextField(
+                      controller: confirmpasswordController,
+                      obsecureText: true,
+                      hintText: 'Confirm Password'),
                   const SizedBox(
                     height: 20.0,
                   ),
-                   Row(
+                  //sign in button
+                  MyButton(onTap: signUp, text: "Sign Up"),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        "Not yet Registered? ",
+                        "Already Registered? ",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -90,8 +96,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       GestureDetector(
                         onTap: widget.onTap,
-                        child:const Text(
-                          "Register Now",
+                        child: const Text(
+                          "Login",
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
