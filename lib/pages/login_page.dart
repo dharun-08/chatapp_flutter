@@ -1,11 +1,13 @@
 import 'package:chat_app/components/my_text_fields.dart';
 import 'package:chat_app/components/my_button.dart';
+import 'package:chat_app/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
 
-  const LoginPage({super.key,required this.onTap});
+  const LoginPage({super.key, required this.onTap});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -16,8 +18,17 @@ class _LoginPageState extends State<LoginPage> {
 
   final passwordController = TextEditingController();
 
-  void signIn() {
-
+  void signIn() async {
+    //get the auth
+    final authService = Provider.of<AuthService>(context, listen: false);
+    try {
+      await authService.signInwithEmailPassword(
+          emailController.text, passwordController.text);
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString()),),);
+    }
+    
   }
 
   @override
@@ -72,13 +83,11 @@ class _LoginPageState extends State<LoginPage> {
                     height: 20.0,
                   ),
                   //sign in button
-                  MyButton(
-                      onTap: signIn,
-                      text: "Sign In"),
+                  MyButton(onTap: signIn, text: "Sign In"),
                   const SizedBox(
                     height: 20.0,
                   ),
-                   Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
@@ -90,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       GestureDetector(
                         onTap: widget.onTap,
-                        child:const Text(
+                        child: const Text(
                           "Register Now",
                           style: TextStyle(
                               color: Colors.black,
